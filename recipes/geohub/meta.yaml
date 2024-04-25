@@ -1,0 +1,51 @@
+{% set name = "geohub" %}
+{% set version = "0.0.5" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/geohub-{{ version }}.tar.gz
+  sha256: a69325b8cab24c7bccbc25aad2bfdab3561ce0eeb700b6630b01f74f28b542ff
+
+build:
+  noarch: python
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  number: 0
+
+requirements:
+  host:
+    - python >=3.8
+    - setuptools >=64
+    - setuptools-scm >=8
+    - pip
+  run:
+    - python >=3.8
+    - numpy
+    - ipyleaflet
+    - geopandas
+    - pandas
+    - localtileserver
+    - rasterio
+    - matplotlib-base
+
+test:
+  imports:
+    - geohub
+  commands:
+    - pip check
+  requires:
+    - pip
+
+about:
+  home: https://mahnaz-meem.github.io/geohub/
+  summary: A python package created with some data and geospatial analysis skills
+  description: A python package created with some data and geospatial analysis skills
+  license: BSD-Source-Code
+  license_file: LICENSE
+  dev_url: https://github.com/mahnaz-meem/geohub
+
+extra:
+  recipe-maintainers:
+    - Mahnaz-Meem
